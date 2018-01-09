@@ -1,5 +1,5 @@
 #
-# system.prop for mido
+# system.prop for oxygen
 #
 
 # Audio
@@ -33,7 +33,7 @@ audio.safx.pbe.enabled=true
 audio.pp.asphere.enabled=false
 audio.dolby.ds2.enabled=true
 af.fast_track_multiplier=2
-persist.speaker.prot.enable=false
+persist.speaker.prot.enable=true
 audio.offload.multiaac.enable=true
 audio.dolby.ds2.hardbypass=true
 flac.sw.decoder.24bit.support=true
@@ -143,7 +143,7 @@ rild.libpath=/vendor/lib64/libril-qc-qmi-1.so
 rild.libargs=-d /dev/smd0
 ril.subscription.types=NV,RUIM
 DEVICE_PROVISIONED=1
-ro.telephony.ril_class=MidoRIL
+#ro.telephony.ril_class=MidoRIL
 ro.telephony.default_network=22,20
 ro.telephony.call_ring.multiple=false
 persist.radio.multisim.config=dsds

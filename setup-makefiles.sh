@@ -18,7 +18,7 @@
 
 set -e
 
-DEVICE=mido
+DEVICE=oxygen
 VENDOR=xiaomi
 
 INITIAL_COPYRIGHT_YEAR=2017
