@@ -46,8 +46,7 @@ qcom.bluetooth.soc=smd
 persist.camera.isp.clock.optmz=0
 vidc.enc.dcvs.extra-buff-count=2
 media.camera.ts.monotonic=1
-camera.display.umax=1920x1080
-camera.display.lmax=1280x720
+persist.camera.HAL3.enabled=1
 persist.camera.stats.test=5
 persist.camera.feature.cac=1
 persist.camera.imglib.cac3=2
@@ -167,9 +166,6 @@ persist.radio.sw_mbn_update=0
 persist.radio.hw_mbn_update=0
 service.qti.ims.enabled=1
 telephony.lteOnCdmaDevice=1
-
-# SdcardFs
-ro.sys.sdcardfs=true
 
 # Time Services
 persist.timed.enable=true
