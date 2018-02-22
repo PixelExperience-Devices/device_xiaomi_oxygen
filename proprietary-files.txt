@@ -10,9 +10,11 @@ vendor/lib64/libfastcvadsp_stub.so
 vendor/lib64/libfastcvopt.so
 
 # ADSP modules
+vendor/lib/rfsa/adsp/dirac_resource.so
 vendor/lib/rfsa/adsp/libFastRPC_AUE_Forward_skel.so
 vendor/lib/rfsa/adsp/libFastRPC_UTF_Forward_skel.so
 vendor/lib/rfsa/adsp/libapps_mem_heap.so
+vendor/lib/rfsa/adsp/libdirac-capiv2.so
 vendor/lib/rfsa/adsp/libdspCV_skel.so
 vendor/lib/rfsa/adsp/libfastcvadsp.so
 vendor/lib/rfsa/adsp/libfastcvadsp_skel.so
@@ -22,6 +24,8 @@ vendor/lib/rfsa/adsp/libscveCleverCapture_skel.so
 vendor/lib/rfsa/adsp/libscveObjectSegmentation_skel.so
 vendor/lib/rfsa/adsp/libscveT2T_skel.so
 vendor/lib/rfsa/adsp/libscveTextReco_skel.so
+vendor/lib/rfsa/adsp/tas2560_aac.bin
+vendor/lib/rfsa/adsp/tas2560_ssi.bin
 
 # Audio
 etc/drc/drc_cfg_5.1.txt
@@ -29,6 +33,8 @@ etc/drc/drc_cfg_AZ.txt
 etc/surround_sound_3mic/surround_sound_rec_5.1.cfg
 etc/surround_sound_3mic/surround_sound_rec_AZ.cfg
 lib/soundfx/libdirac.so
+lib/hw/audio.primary.msm8953.so
+lib64/hw/audio.primary.msm8953.so
 vendor/lib/libacdb-fts.so
 vendor/lib/libacdbloader.so
 vendor/lib/libacdbmapper.so
@@ -82,6 +88,11 @@ etc/acdbdata/Tutu/Tutu_Hdmi_cal.acdb
 etc/acdbdata/Tutu/Tutu_Headset_cal.acdb
 etc/acdbdata/Tutu/Tutu_Speaker_cal.acdb
 
+# wbc used by bluetooth
+etc/permissions/com.quicinc.wbcservice.xml
+etc/permissions/com.quicinc.wbc.xml
+framework/com.quicinc.wbc.jar
+framework/com.quicinc.wbcservice.jar
 
 # Bluetooth
 bin/btnvtool
@@ -1541,6 +1552,7 @@ vendor/lib64/hw/gatekeeper.msm8953.so
 # GPS
 -framework/com.qti.location.sdk.jar
 -priv-app/com.qualcomm.location/com.qualcomm.location.apk
+bin/garden_app
 bin/loc_launcher
 bin/lowi-server
 bin/xtwifi-client
@@ -1776,6 +1788,8 @@ vendor/lib64/libdisp-aba.so
 # QMI
 bin/irsc_util
 etc/permissions/qti_permissions.xml
+-lib/libqminvapi.so
+-lib64/libqminvapi.so
 vendor/lib/libdiag.so
 vendor/lib/libdsi_netctrl.so
 vendor/lib/libdsutils.so
@@ -1916,12 +1930,35 @@ vendor/lib64/libTimeService.so
 # USB
 etc/firmware/ice40.bin
 
+# Power
+-lib/hw/power.qcom.so
+-lib64/hw/power.qcom.so
+
 # Wi-Fi
 bin/wcnss_service
 
 # mdtp
 vendor/lib64/libmdtp.so
 vendor/bin/mdtpd
+
+# MTD
+bin/mtd
+lib64/libmtservice.so
+lib64/libmt.so
+
+# mli pay
+bin/mlipayd
+lib64/libmlipayservice.so
+lib64/libmlipay.so
+
+# Virtual SIM
+bin/vsimd
+lib/libvsimservice.so
+lib/libvsim.so
+
+# Cit
+-app/Cit/Cit.apk
+lib64/libtasft_jni.so
 
 # unknown
 bin/diag_mdlog
