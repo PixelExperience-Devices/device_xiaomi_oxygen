@@ -306,6 +306,9 @@ case "$target" in
         ;;
 esac
 
+# Set shared touchpanel nodes ownership (these are proc_symlinks to the real sysfs nodes)
+chown -LR system.system /sys/bus/i2c/devices/3-0038
+
 #
 # Copy qcril.db if needed for RIL
 #
