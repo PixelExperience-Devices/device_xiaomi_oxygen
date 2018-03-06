@@ -45,11 +45,16 @@ voice.voip.conc.disabled=true
 # Bluetooth
 bluetooth.hfp.client=1
 qcom.bluetooth.soc=smd
+ro.btconfig.if=smd
+ro.btconfig.dev=/dev/smd3
+ro.btconfig.vendor=qcom
+ro.btconfig.chip=WCN3680
 
 # Camera
 camera.hal1.packagelist=com.skype.raider,com.google.android.talk
 camera.lowpower.record.enable=1
 persist.camera.HAL3.enabled=1
+persist.camera.is_mode=4
 
 # Nitz
 persist.rild.nitz_long_ons_0=
@@ -272,3 +277,25 @@ ro.se.type=eSE,HCE
 #Set ims sip user agent
 ro.build.software.version=Android7.0_8
 ro.fota.oem=Xiaomi
+
+#Adding tweaks from Globe ROM
+# Saves some battery without reducing performances
+wifi.supplicant_scan_interval=200
+pm.sleep_mode=3
+power.saving.mode=1
+ro.ril.disable.power.collapse=0
+persist.power.useautobrightadj=true
+
+# GOOGLE DNS
+net.dns1=8.8.8.8
+net.dns2=8.8.4.4
+net.rmnet0.dns1=8.8.8.8
+net.rmnet0.dns2=8.8.4.4
+net.ppp0.dns1=8.8.8.8
+net.ppp0.dns2=8.8.4.4
+net.wlan0.dns1=8.8.8.8
+net.wlan0.dns2=8.8.4.4
+net.eth0.dns1=8.8.8.8
+net.eth0.dns2=8.8.4.4
+net.gprs.dns1=8.8.8.8
+net.gprs.dns2=8.8.4.4
