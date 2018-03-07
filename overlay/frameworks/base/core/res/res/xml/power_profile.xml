@@ -10,9 +10,9 @@
     <item name="wifi.scan">43.25</item>
     <item name="dsp.audio">11.9</item>
     <item name="dsp.video">56.87</item>
-    <item name="camera.flashlight">268.55</item>
-    <item name="camera.avg">435.44</item>
-    <item name="gps.on">59.56</item>
+    <item name="camera.flashlight">0.1</item>
+    <item name="camera.avg">0.1</item>
+    <item name="gps.on">0.1</item>
     <item name="radio.active">231.8</item>
     <item name="radio.scanning">34.2</item>
     <array name="radio.on">

@@ -101,12 +101,12 @@ function configure_memory_parameters() {
     echo 30 >  /sys/module/zcache/parameters/max_pool_percent
 
     # Zram disk - 512MB size
-    #zram_enable=`getprop ro.config.zram`
-    #if [ "$zram_enable" == "true" ]; then
-    #    echo 536870912 > /sys/block/zram0/disksize
-    #    mkswap /dev/block/zram0
-    #    swapon /dev/block/zram0 -p 32758
-    #fi
+    zram_enable=`getprop ro.config.zram`
+    if [ "$zram_enable" == "true" ]; then
+        echo 536870912 > /sys/block/zram0/disksize
+        mkswap /dev/block/zram0
+        swapon /dev/block/zram0 -p 32758
+    fi
 
     SWAP_ENABLE_THRESHOLD=1048576
     swap_enable=`getprop ro.config.swap`
@@ -2001,7 +2001,25 @@ case "$target" in
 esac
 
 case "$target" in
-    "msm8998")
+    "msmcobalt")
+	soc_revision=`cat /sys/devices/soc0/revision`
+	if [ "$soc_revision" == "1.0" ]; then
+		# Retention modes on v1.x are experimental but not PoR
+		# C2d, D2d, D2e retention modes are disbled
+		echo N > /sys/module/lpm_levels/system/pwr/cpu0/ret/idle_enabled
+		echo N > /sys/module/lpm_levels/system/pwr/cpu1/ret/idle_enabled
+		echo N > /sys/module/lpm_levels/system/pwr/cpu2/ret/idle_enabled
+		echo N > /sys/module/lpm_levels/system/pwr/cpu3/ret/idle_enabled
+		echo N > /sys/module/lpm_levels/system/perf/cpu4/ret/idle_enabled
+		echo N > /sys/module/lpm_levels/system/perf/cpu5/ret/idle_enabled
+		echo N > /sys/module/lpm_levels/system/perf/cpu6/ret/idle_enabled
+		echo N > /sys/module/lpm_levels/system/perf/cpu7/ret/idle_enabled
+		echo N > /sys/module/lpm_levels/system/pwr/pwr-l2-dynret/idle_enabled
+		echo N > /sys/module/lpm_levels/system/pwr/pwr-l2-ret/idle_enabled
+		echo N > /sys/module/lpm_levels/system/perf/perf-l2-dynret/idle_enabled
+		echo N > /sys/module/lpm_levels/system/perf/perf-l2-ret/idle_enabled
+		#Enable all LPMs by default
+	fi
 
 	echo 2 > /sys/devices/system/cpu/cpu4/core_ctl/min_cpus
 	echo 60 > /sys/devices/system/cpu/cpu4/core_ctl/busy_up_thres
@@ -2020,12 +2038,6 @@ case "$target" in
 	echo 5 > /proc/sys/kernel/sched_spill_nr_run
 	echo 1 > /proc/sys/kernel/sched_restrict_cluster_spill
 	start iop
-
-        # disable thermal bcl hotplug to switch governor
-        echo 0 > /sys/module/msm_thermal/core_control/enabled
-
-        # online CPU0
-        echo 1 > /sys/devices/system/cpu/cpu0/online
 	# configure governor settings for little cluster
 	echo "interactive" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
 	echo 1 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/use_sched_load
@@ -2040,8 +2052,6 @@ case "$target" in
 	echo 79000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/max_freq_hysteresis
 	echo 300000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
 	echo 1 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/ignore_hispeed_on_notif
-        # online CPU4
-        echo 1 > /sys/devices/system/cpu/cpu4/online
 	# configure governor settings for big cluster
 	echo "interactive" > /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor
 	echo 1 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/use_sched_load
@@ -2056,9 +2066,6 @@ case "$target" in
 	echo 79000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/max_freq_hysteresis
 	echo 300000 > /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq
 	echo 1 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/ignore_hispeed_on_notif
-
-        # re-enable thermal and BCL hotplug
-        echo 1 > /sys/module/msm_thermal/core_control/enabled
 
         # Enable input boost configuration
         echo "0:1324800" > /sys/module/cpu_boost/parameters/input_boost_freq
@@ -2102,7 +2109,7 @@ case "$target" in
 	fi
 
 	case "$soc_id" in
-		"292") #msm8998
+		"292") #msmcobalt
 		# Start Host based Touch processing
 		case "$hw_platform" in
 		"QRD")
@@ -2111,19 +2118,6 @@ case "$target" in
 		esac
 	    ;;
 	esac
-
-	echo N > /sys/module/lpm_levels/system/pwr/cpu0/ret/idle_enabled
-	echo N > /sys/module/lpm_levels/system/pwr/cpu1/ret/idle_enabled
-	echo N > /sys/module/lpm_levels/system/pwr/cpu2/ret/idle_enabled
-	echo N > /sys/module/lpm_levels/system/pwr/cpu3/ret/idle_enabled
-	echo N > /sys/module/lpm_levels/system/perf/cpu4/ret/idle_enabled
-	echo N > /sys/module/lpm_levels/system/perf/cpu5/ret/idle_enabled
-	echo N > /sys/module/lpm_levels/system/perf/cpu6/ret/idle_enabled
-	echo N > /sys/module/lpm_levels/system/perf/cpu7/ret/idle_enabled
-	echo N > /sys/module/lpm_levels/system/pwr/pwr-l2-dynret/idle_enabled
-	echo N > /sys/module/lpm_levels/system/pwr/pwr-l2-ret/idle_enabled
-	echo N > /sys/module/lpm_levels/system/perf/perf-l2-dynret/idle_enabled
-	echo N > /sys/module/lpm_levels/system/perf/perf-l2-ret/idle_enabled
 	echo N > /sys/module/lpm_levels/parameters/sleep_disabled
     ;;
 esac
@@ -2239,7 +2233,7 @@ case "$target" in
         start mpdecision
         echo 512 > /sys/block/mmcblk0/bdi/read_ahead_kb
     ;;
-    "msm8994" | "msm8992" | "msm8996" | "msm8998")
+    "msm8994" | "msm8992" | "msm8996" | "msmcobalt")
         setprop sys.post_boot.parsed 1
     ;;
     "apq8084")

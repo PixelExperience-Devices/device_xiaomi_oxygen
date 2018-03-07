@@ -25,5 +25,5 @@ BOARD_VENDOR := Xiaomi
 PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
-    BUILD_FINGERPRINT="Xiaomi/oxygen/oxygen:7.1.1/NMF26F/V9.0.3.0.NDDMIEI:user/release-keys" \
-    PRIVATE_BUILD_DESC="oxygen-user 7.1.1 NMF26F V9.0.3.0.NDDMIEI release-keys"
+    BUILD_FINGERPRINT=Xiaomi/oxygen/oxygen:7.1.1/NMF26F/8.1.11:user/release-keys \
+    PRIVATE_BUILD_DESC="oxygen-user 7.1.1 NMF26F 8.1.11 release-keys"

@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2017 The LineageOS Project
+# Copyright (C) 2018 The LineageOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,17 +14,20 @@
 # limitations under the License.
 #
 
-# Inherit from those products. Most specific first.
-$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
+LOCAL_PATH := $(call my-dir)
 
-# Inherit from oxygen device
-$(call inherit-product, device/xiaomi/oxygen/device.mk)
+include $(CLEAR_VARS)
 
-# Device identifier. This must come after all inclusions
-TARGET_VENDOR := Xiaomi
-PRODUCT_DEVICE := oxygen
-PRODUCT_NAME := full_oxygen
-PRODUCT_BRAND := Xiaomi
-PRODUCT_MODEL := MI MAX 2
-PRODUCT_MANUFACTURER := Xiaomi
+LOCAL_SRC_FILES := \
+    FingerprintWrapper.cpp
+
+LOCAL_SHARED_LIBRARIES := \
+    libhardware liblog
+
+LOCAL_MODULE_RELATIVE_PATH := hw
+LOCAL_MODULE := fingerprint.$(TARGET_BOARD_PLATFORM)
+LOCAL_MODULE_TAGS := optional
+
+LOCAL_MULTILIB := 64
+
+include $(BUILD_SHARED_LIBRARY)
