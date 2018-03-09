@@ -27,13 +27,13 @@ import static com.android.internal.telephony.RILConstants.*;
  *
  * {@hide}
  */
-public class MidoRIL extends RIL implements CommandsInterface {
+public class OxygenRIL extends RIL implements CommandsInterface {
 
-    public MidoRIL(Context context, int preferredNetworkType, int cdmaSubscription) {
+    public OxygenRIL(Context context, int preferredNetworkType, int cdmaSubscription) {
         this(context, preferredNetworkType, cdmaSubscription, null);
     }
 
-    public MidoRIL(Context context, int preferredNetworkType,
+    public OxygenRIL(Context context, int preferredNetworkType,
             int cdmaSubscription, Integer instanceId) {
         super(context, preferredNetworkType, cdmaSubscription, instanceId);
     }

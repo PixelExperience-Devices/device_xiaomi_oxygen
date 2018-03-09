@@ -67,6 +67,10 @@ PRODUCT_PACKAGES += \
     AntHalService \
     com.dsi.ant.antradio_library \
     libantradio
+	
+# APN-Conf
+PRODUCT_COPY_FILES += \
+	$(LOCAL_PATH)/configs/apns-conf.xml:system/etc/apns-conf.xml
 
 # Audio
 PRODUCT_PACKAGES += \
