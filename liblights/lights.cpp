@@ -41,6 +41,31 @@ static char const *const LCD_FILE  = "/sys/class/leds/lcd-backlight/brightness";
 static char const *const BUTTON_FILE = "/sys/class/leds/button-backlight/brightness";
 static char const *const FLASHLIGHT_LED = "/sys/class/leds/flashlight/brightness";
 
+// Adding blink config - Testing
+#define MAX_PATH_SIZE 80
+static pthread_once_t g_init = PTHREAD_ONCE_INIT;
+static pthread_mutex_t g_lock = PTHREAD_MUTEX_INITIALIZER;
+static struct light_state_t g_notification;
+static struct light_state_t g_battery;
+static int g_attention = 0;
+
+char const*const WHITE_LED_FILE
+        = "/sys/class/leds/white/brightness";
+
+char const*const LED_FREQ_FILE
+        = "/sys/class/leds/%s/device/grpfreq";
+		
+char const*const LED_PWM_FILE
+        = "/sys/class/leds/%s/device/grppwm";
+		
+char const*const LED_BLINK_FILE
+        = "/sys/class/leds/%s/device/blink";
+		
+char const*const LED_LOCK_UPDATE_FILE
+        = "/sys/class/leds/%s/device/lock";
+		
+
+
 static int read_buffer(char const *path, char *buffer, size_t buffer_size)
 {
 	static bool already_warned = false;
