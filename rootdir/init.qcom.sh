@@ -1,4 +1,5 @@
-#!/vendor/bin/sh
+#! /vendor/bin/sh
+
 # Copyright (c) 2009-2016, The Linux Foundation. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -173,7 +174,7 @@ case "$target" in
         esac
         start_charger_monitor
         ;;
-		"sdm660")
+    "sdm660")
         if [ -f /sys/devices/soc0/soc_id ]; then
              soc_id=`cat /sys/devices/soc0/soc_id`
         else
@@ -309,7 +310,7 @@ case "$target" in
                        "RCM")
                                     setprop qemu.hw.mainkeys 0
                                     ;;
-						"QRD")
+                       "QRD")
                                     setprop qemu.hw.mainkeys 0
                                     ;;
                   esac
@@ -377,6 +378,10 @@ if [ ! -f /firmware/verinfo/ver_info.txt -o "$prev_version_info" != "$cur_versio
 fi
 cp /firmware/image/modem_pr/mbn_ota.txt /data/vendor/radio/modem_config
 chown radio.radio /data/vendor/radio/modem_config/mbn_ota.txt
+cp /firmware/image/modem_pr/mbn_oin.txt /data/misc/radio/modem_config
+chown radio.radio /data/misc/radio/modem_config/mbn_oin.txt
+cp /firmware/image/modem_pr/mbn_ogl.txt /data/misc/radio/modem_config
+chown radio.radio /data/misc/radio/modem_config/mbn_ogl.txt
 echo 1 > /data/vendor/radio/copy_complete
 
 #check build variant for printk logging

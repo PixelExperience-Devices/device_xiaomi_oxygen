@@ -29,6 +29,25 @@
 -->
 
 <mixer>
+    <ctl name="HiFi Function" value="On" />
+    <ctl name="SRS Trumedia MI2S" value="1" />
+    <ctl name="SRS Trumedia I2S" value="1" />
+    <ctl name="SRS Trumedia HDMI" value="1" />
+    <ctl name="SRS Trumedia" value="1" />
+    <ctl name="HPH Type" value="1" />
+    <ctl name="Codec Wideband" value="1" />
+    <ctl name="DS2 OnOff" value="Off" />
+    <ctl name="PCM_Dev 33 Topology" value="DTS" />
+    <ctl name="PCM_Dev 15 Topology" value="DTS" />
+    <ctl name="PCM_Dev 24 Topology" value="DTS" />
+    <ctl name="PCM_Dev 21 Topology" value="DTS" />
+    <ctl name="PCM_Dev 17 Topology" value="DTS" />
+    <ctl name="PCM_Dev 13 Topology" value="DTS" />
+    <ctl name="PCM_Dev 9 Topology" value="DTS" />
+    <ctl name="PCM_Dev Topology" value="DTS" />
+    <ctl name="Set HPX ActiveBe" value="1" />
+    <ctl name="Set HPX OnOff" value="1" />
+    <ctl name="Set Custom Stereo OnOff" value="Off" />
     <!-- These are the initial mixer settings -->
     <ctl name="Voice Rx Device Mute" id="0" value="0" />
     <ctl name="Voice Rx Device Mute" id="1" value="-1" />
@@ -1278,13 +1297,11 @@
         <ctl name="RX1 MIX1 INP1" value="RX1" />
         <ctl name="RX2 MIX1 INP1" value="RX2" />
         <ctl name="RX HPH Mode" value="HD2" />
-        <ctl name="COMP0 RX1" value="1" />
-        <ctl name="COMP0 RX2" value="1" />
+        <ctl name="COMP0 RX1" value="0" />
+        <ctl name="COMP0 RX2" value="0" />
         <ctl name="RDAC2 MUX" value="RX2" />
         <ctl name="HPHL" value="Switch" />
         <ctl name="HPHR" value="Switch" />
-		<ctl name="RX1 Digital Volume" value="71" />
-		<ctl name="RX2 Digital Volume" value="71" />
     </path>
 
     <path name="headset-mic">
@@ -1308,15 +1325,12 @@
     </path>
 
     <path name="sidetone-headphones">
-        <path name="sidetone-iir" />
-        <ctl name="RX1 MIX2 INP1" value="IIR1" />
-        <ctl name="RX2 MIX2 INP1" value="IIR1" />
-        <ctl name="IIR1 INP1 Volume" value="53" />
     </path>
 
 
     <path name="voice-handset">
         <path name="handset" />
+        <ctl name="TAS2560 Receiver DAC Volume" value="12db" />
     </path>
 
     <path name="voice-speaker">
@@ -1402,7 +1416,8 @@
     <!-- Dual MIC devices -->
     <path name="handset-dmic-music">
         <path name="adc1" />
-        <ctl name="ADC3 Volume" value="6" />
+        <ctl name="ADC3 Volume" value="4" />
+        <ctl name="ADC1 Volume" value="4" />
         <ctl name="DEC2 MUX" value="ADC2" />
         <ctl name="MI2S_TX Channels" value="Two" />
         <ctl name="ADC2 MUX" value="INP3" />
@@ -1412,6 +1427,7 @@
     <path name="handset-dmic-voice">
         <path name="adc1" />
         <ctl name="ADC3 Volume" value="6" />
+        <ctl name="ADC1 Volume" value="6" />
         <ctl name="DEC2 MUX" value="ADC2" />
         <ctl name="MI2S_TX Channels" value="Two" />
         <ctl name="ADC2 MUX" value="INP3" />
@@ -1419,7 +1435,8 @@
 
     <path name="handset-dmic-interview">
         <path name="adc1" />
-        <ctl name="ADC3 Volume" value="6" />
+        <ctl name="ADC3 Volume" value="5" />
+        <ctl name="ADC1 Volume" value="5" />
         <ctl name="DEC2 MUX" value="ADC2" />
         <ctl name="MI2S_TX Channels" value="Two" />
         <ctl name="ADC2 MUX" value="INP3" />
@@ -1427,6 +1444,7 @@
     <!-- Dual MIC devices -->
     <path name="speaker-dmic-endfire">
         <path name="adc1" />
+        <ctl name="ADC1 Volume" value="6" />
         <ctl name="ADC3 Volume" value="6" />
         <ctl name="DEC2 MUX" value="ADC2" />
         <ctl name="MI2S_TX Channels" value="Two" />
@@ -1442,7 +1460,11 @@
     </path>
 
     <path name="voice-dmic-ef">
-        <path name="dmic-endfire" />
+        <path name="adc1" />
+        <ctl name="ADC3 Volume" value="6" />
+        <ctl name="DEC2 MUX" value="ADC2" />
+        <ctl name="MI2S_TX Channels" value="Two" />
+        <ctl name="ADC2 MUX" value="INP3" />
     </path>
 
     <path name="voice-speaker-dmic-ef">

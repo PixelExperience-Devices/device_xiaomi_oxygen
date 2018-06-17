@@ -1,4 +1,5 @@
-#!/vendor/bin/sh
+#! /vendor/bin/sh
+
 # Copyright (c) 2012-2013, 2016, The Linux Foundation. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -52,7 +53,8 @@ function configure_memory_parameters() {
     #
     # Set ALMK parameters (usually above the highest minfree values)
     # 32 bit will have 53K & 64 bit will have 81K
-    
+    #
+
 ProductName=`getprop ro.product.name`
 
 if [ "$ProductName" == "msm8996" ]; then
@@ -61,25 +63,26 @@ if [ "$ProductName" == "msm8996" ]; then
       echo 81250 > /sys/module/lowmemorykiller/parameters/vmpressure_file_min
 
       configure_zram_parameters
-else	
+else
     arch_type=`uname -m`
     MemTotalStr=`cat /proc/meminfo | grep MemTotal`
     MemTotal=${MemTotalStr:16:8}
-	
+
     # Read adj series and set adj threshold for PPR and ALMK.
     # This is required since adj values change from framework to framework.
     adj_series=`cat /sys/module/lowmemorykiller/parameters/adj`
     adj_1="${adj_series#*,}"
     set_almk_ppr_adj="${adj_1%%,*}"
-	
+
     # PPR and ALMK should not act on HOME adj and below.
     # Normalized ADJ for HOME is 6. Hence multiply by 6
     # ADJ score represented as INT in LMK params, actual score can be in decimal
     # Hence add 6 considering a worst case of 0.9 conversion to INT (0.9*6).
-	
     set_almk_ppr_adj=$(((set_almk_ppr_adj * 6) + 6))
     echo $set_almk_ppr_adj > /sys/module/lowmemorykiller/parameters/adj_max_shift
     echo $set_almk_ppr_adj > /sys/module/process_reclaim/parameters/min_score_adj
+
+    #Set other memory parameters
     echo 1 > /sys/module/process_reclaim/parameters/enable_process_reclaim
     echo 70 > /sys/module/process_reclaim/parameters/pressure_max
     echo 30 > /sys/module/process_reclaim/parameters/swap_opt_eff
@@ -105,9 +108,6 @@ else
         echo "15360,19200,23040,26880,34415,43737" > /sys/module/lowmemorykiller/parameters/minfree
         echo 53059 > /sys/module/lowmemorykiller/parameters/vmpressure_file_min
     fi
-    clearPercent=$((((adjZeroMinFree * 100) / MemTotalPg) + 1))
-    echo $clearPercent > /sys/module/zcache/parameters/clear_percent
-    echo 30 >  /sys/module/zcache/parameters/max_pool_percent
 
     configure_zram_parameters
 
@@ -133,7 +133,7 @@ else
         mkswap /data/system/swap/swapfile
         swapon /data/system/swap/swapfile -p 32758
     fi
-	fi
+fi
 }
 
 function enable_memory_features()
@@ -157,7 +157,7 @@ function start_hbtp()
         # Start the Host based Touch processing but not in the power off mode.
         bootmode=`getprop ro.bootmode`
         if [ "charger" != $bootmode ]; then
-                start_hbtp
+                start hbtp
         fi
 }
 
@@ -742,7 +742,7 @@ case "$target" in
                 echo 1 > /sys/devices/system/cpu/cpu7/online
 
                 # HMP scheduler (big.Little cluster related) settings
-                echo 60 > /proc/sys/kernel/sched_upmigrate /sys/class/devfreq/*qcom,mincpubw*/governor
+                echo 60 > /proc/sys/kernel/sched_upmigrate
                 echo 40 > /proc/sys/kernel/sched_downmigrate
             ;;
         esac
@@ -918,9 +918,10 @@ case "$target" in
                 echo 1 > /sys/module/lpm_levels/lpm_workarounds/dynamic_clock_gating
                 # Enable timer migration to little cluster
                 echo 1 > /proc/sys/kernel/power_aware_timer_migration
-				
-				# Set Memory parameters
-               configure_memory_parameters
+
+                # Set Memory parameters
+                configure_memory_parameters
+
             ;;
             *)
                 panel=`cat /sys/class/graphics/fb0/modes`
@@ -963,19 +964,19 @@ case "$target" in
                 echo 3 > /sys/devices/system/cpu/cpu6/sched_mostly_idle_nr_run
                 echo 3 > /sys/devices/system/cpu/cpu7/sched_mostly_idle_nr_run
 
-                for devfreq_gov in  /sys/class/devfreq/*qcom,mincpubw*/governor
+                for devfreq_gov in /sys/class/devfreq/*qcom,mincpubw*/governor
                 do
                     echo "cpufreq" > $devfreq_gov
                 done
 
-                for devfreq_gov in /sys/class/devfreq/qcom,cpubw*/governor
+                for devfreq_gov in /sys/class/devfreq/*qcom,cpubw*/governor
                 do
                     echo "bw_hwmon" > $devfreq_gov
-                    for cpu_io_percent in /sys/class/devfreq/*qcom,cpubw*/io_percent
+                    for cpu_io_percent in /sys/class/devfreq/*qcom,cpubw*/bw_hwmon/io_percent
                     do
                         echo 20 > $cpu_io_percent
                     done
-                    for cpu_guard_band in /sys/class/devfreq/*qcom,cpubw*/guard_band_mbps
+                    for cpu_guard_band in /sys/class/devfreq/*qcom,cpubw*/bw_hwmon/guard_band_mbps
                     do
                         echo 30 > $cpu_guard_band
                     done
@@ -1119,9 +1120,13 @@ case "$target" in
 
                 # Enable timer migration to little cluster
                 echo 1 > /proc/sys/kernel/power_aware_timer_migration
+
+                # Set Memory parameters
+                configure_memory_parameters
+
             ;;
         esac
-		#Enable Memory Features
+        #Enable Memory Features
         enable_memory_features
     ;;
 esac
@@ -1176,8 +1181,10 @@ case "$target" in
                 # Apply inter-cluster load balancer restrictions
                 echo 1 > /proc/sys/kernel/sched_restrict_cluster_spill
 
+                # set sync wakee policy tunable
+                echo 1 > /proc/sys/kernel/sched_prefer_sync_wakee_to_waker
 
-                for devfreq_gov in  /sys/class/devfreq/*qcom,mincpubw*/governor
+                for devfreq_gov in /sys/class/devfreq/qcom,mincpubw*/governor
                 do
                     echo "cpufreq" > $devfreq_gov
                 done
@@ -1397,7 +1404,7 @@ case "$target" in
 		# core_ctl is not needed for 8917. Disable it.
 		echo 1 > /sys/devices/system/cpu/cpu0/core_ctl/disable
 
-                for devfreq_gov in  /sys/class/devfreq/*qcom,mincpubw*/governor
+                for devfreq_gov in /sys/class/devfreq/qcom,mincpubw*/governor
                 do
                     echo "cpufreq" > $devfreq_gov
                 done
@@ -1519,7 +1526,7 @@ case "$target" in
                 echo 0 > /sys/devices/system/cpu/cpu6/sched_prefer_idle
                 echo 0 > /sys/devices/system/cpu/cpu7/sched_prefer_idle
 
-                for devfreq_gov in  /sys/class/devfreq/*qcom,mincpubw*/governor
+                for devfreq_gov in /sys/class/devfreq/qcom,mincpubw*/governor
                 do
                     echo "cpufreq" > $devfreq_gov
                 done
@@ -1623,7 +1630,10 @@ case "$target" in
 
             ;;
         esac
-		case "$target" in
+    ;;
+esac
+
+case "$target" in
     "sdm660")
 
         # Set the default IRQ affinity to the primary cluster. When a
@@ -1670,7 +1680,7 @@ case "$target" in
 
             # Setting b.L scheduler parameters
             echo 96 > /proc/sys/kernel/sched_upmigrate
-           echo 90 > /proc/sys/kernel/sched_downmigrate
+            echo 90 > /proc/sys/kernel/sched_downmigrate
             echo 140 > /proc/sys/kernel/sched_group_upmigrate
             echo 120 > /proc/sys/kernel/sched_group_downmigrate
             echo 0 > /proc/sys/kernel/sched_select_prev_cpu_us
@@ -1721,8 +1731,6 @@ case "$target" in
             echo 1113600 > /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq
             echo 1 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/ignore_hispeed_on_notif
             echo 1 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/fast_ramp_down
-			# re-enable thermal and BCL hotplug
-			echo 1 > /sys/module/msm_thermal/core_control/enabled
 
             # bring all cores online
             echo 1 > /sys/devices/system/cpu/cpu0/online
@@ -2109,7 +2117,7 @@ case "$target" in
         echo 19000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/above_hispeed_delay
         echo 90 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/go_hispeed_load
         echo 20000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_rate
-        echo 1574400 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/hispeed_freq
+        echo 1536000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/hispeed_freq
         echo 1 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/io_is_busy
         echo 85 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/target_loads
         echo 40000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/min_sample_time
@@ -2256,7 +2264,6 @@ case "$target" in
         bcl_soc_hotplug_mask=`cat /sys/devices/soc/soc:qcom,bcl/hotplug_soc_mask`
         echo 0 > /sys/devices/soc/soc:qcom,bcl/hotplug_soc_mask
         echo -n enable > /sys/devices/soc/soc:qcom,bcl/mode
-
         # set sync wakee policy tunable
         echo 1 > /proc/sys/kernel/sched_prefer_sync_wakee_to_waker
         # configure governor settings for little cluster
@@ -2355,13 +2362,14 @@ case "$target" in
 	echo N > /sys/module/lpm_levels/parameters/sleep_disabled
         # Starting io prefetcher service
         start iop
+
         # Set Memory parameters
         configure_memory_parameters
     ;;
 esac
 
 case "$target" in
-     "sdm845")
+    "sdm845")
 
         # Set the default IRQ affinity to the silver cluster. When a
         # CPU is isolated/hotplugged, the IRQ affinity is adjusted
@@ -2508,12 +2516,14 @@ case "$target" in
 	echo 400000 > /proc/sys/kernel/sched_freq_dec_notify
 	echo 5 > /proc/sys/kernel/sched_spill_nr_run
 	echo 1 > /proc/sys/kernel/sched_restrict_cluster_spill
-	echo 1 > /proc/sys/kernel/sched_prefer_sync_wakee_to_waker
+        echo 1 > /proc/sys/kernel/sched_prefer_sync_wakee_to_waker
 	start iop
-    # disable thermal bcl hotplug to switch governor
-    echo 0 > /sys/module/msm_thermal/core_control/enabled
-    # online CPU0
-    echo 1 > /sys/devices/system/cpu/cpu0/online
+
+        # disable thermal bcl hotplug to switch governor
+        echo 0 > /sys/module/msm_thermal/core_control/enabled
+
+        # online CPU0
+        echo 1 > /sys/devices/system/cpu/cpu0/online
 	# configure governor settings for little cluster
 	echo "interactive" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
 	echo 1 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/use_sched_load
@@ -2528,6 +2538,8 @@ case "$target" in
 	echo 79000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/max_freq_hysteresis
 	echo 300000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
 	echo 1 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/ignore_hispeed_on_notif
+        # online CPU4
+        echo 1 > /sys/devices/system/cpu/cpu4/online
 	# configure governor settings for big cluster
 	echo "interactive" > /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor
 	echo 1 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/use_sched_load
@@ -2535,15 +2547,16 @@ case "$target" in
 	echo 19000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/above_hispeed_delay
 	echo 90 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/go_hispeed_load
 	echo 20000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_rate
-	echo 1536000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/hispeed_freq
+	echo 1574400 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/hispeed_freq
 	echo 1 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/io_is_busy
 	echo "83 1939200:90 2016000:95" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/target_loads
 	echo 19000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/min_sample_time
 	echo 79000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/max_freq_hysteresis
 	echo 300000 > /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq
 	echo 1 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/ignore_hispeed_on_notif
-	# online CPU4
-    echo 1 > /sys/devices/system/cpu/cpu4/online
+
+        # re-enable thermal and BCL hotplug
+        echo 1 > /sys/module/msm_thermal/core_control/enabled
 
         # Enable input boost configuration
         echo "0:1324800" > /sys/module/cpu_boost/parameters/input_boost_freq
@@ -2585,6 +2598,7 @@ case "$target" in
 	else
 		hw_platform=`cat /sys/devices/system/soc/soc0/hw_platform`
 	fi
+
 	if [ -f /sys/devices/soc0/platform_version ]; then
 		platform_version=`cat /sys/devices/soc0/platform_version`
 		platform_major_version=$((10#${platform_version}>>16))
@@ -2609,10 +2623,12 @@ case "$target" in
 					fi
 					;;
 			esac
+
 			;;
 		esac
 	    ;;
 	esac
+
 	echo N > /sys/module/lpm_levels/system/pwr/cpu0/ret/idle_enabled
 	echo N > /sys/module/lpm_levels/system/pwr/cpu1/ret/idle_enabled
 	echo N > /sys/module/lpm_levels/system/pwr/cpu2/ret/idle_enabled
@@ -2626,9 +2642,10 @@ case "$target" in
 	echo N > /sys/module/lpm_levels/system/perf/perf-l2-dynret/idle_enabled
 	echo N > /sys/module/lpm_levels/system/perf/perf-l2-ret/idle_enabled
 	echo N > /sys/module/lpm_levels/parameters/sleep_disabled
-	echo 0-3 > /dev/cpuset/background/cpus
-    echo 0-3 > /dev/cpuset/system-background/cpus
-    echo 0 > /proc/sys/kernel/sched_boost
+
+        echo 0-3 > /dev/cpuset/background/cpus
+        echo 0-3 > /dev/cpuset/system-background/cpus
+        echo 0 > /proc/sys/kernel/sched_boost
     ;;
 esac
 
@@ -2671,9 +2688,9 @@ case "$target" in
 
         # Bring up all cores online
         echo 1 > /sys/devices/system/cpu/cpu1/online
-	echo 1 > /sys/devices/system/cpu/cpu2/online
-    echo 1 > /sys/devices/system/cpu/cpu3/online
-    echo 0 > /sys/module/lpm_levels/parameters/sleep_disabled
+        echo 1 > /sys/devices/system/cpu/cpu2/online
+        echo 1 > /sys/devices/system/cpu/cpu3/online
+        echo 0 > /sys/module/lpm_levels/parameters/sleep_disabled
 
 	# Tune core control
 	echo 2 > /sys/devices/system/cpu/cpu0/core_ctl/min_cpus
@@ -2743,7 +2760,7 @@ case "$target" in
     "msm8916")
         setprop sys.post_boot.parsed 1
     ;;
-	"msm8909")
+    "msm8909")
         setprop sys.post_boot.parsed 1
     ;;
     "msm8952")
@@ -2761,7 +2778,7 @@ case "$target" in
         start mpdecision
         echo 512 > /sys/block/mmcblk0/bdi/read_ahead_kb
     ;;
-    "msm8994" | "msm8992" | "msm8996" | "msm8998" | "sdm660" | "apq8098_latv" | "sdm845" )
+    "msm8994" | "msm8992" | "msm8996" | "msm8998" | "sdm660" | "apq8098_latv" | "sdm845")
         setprop sys.post_boot.parsed 1
     ;;
     "apq8084")
