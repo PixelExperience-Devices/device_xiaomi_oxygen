@@ -28,11 +28,11 @@ VNDK_SP_LIBRARIES := \
     libz
 
 EXTRA_VENDOR_LIBRARIES := \
+    android.hardware.power@1.0 \
     android.hidl.base@1.0 \
     android.hidl.manager@1.0 \
     vendor.display.color@1.0 \
     vendor.display.config@1.0 \
-    vendor.lineage.power@1.0 \
     vendor.qti.hardware.iop@1.0
 
 
