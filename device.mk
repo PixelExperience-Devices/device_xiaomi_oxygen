@@ -24,11 +24,12 @@ $(call inherit-product, vendor/xiaomi/oxygen/oxygen-vendor.mk)
 # Screen density
 PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := xxhdpi
-LOCAL_AAPT_FLAGS += --auto-add-overlay
+
+# Allow Missing Dependencies
+ALLOW_MISSING_DEPENDENCIES := true
 
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += $(DEVICE_PATH)/overlay
-DEVICE_PACKAGE_OVERLAYS += $(DEVICE_PATH)/overlay-lineage
 
 #Bootanimation res
 TARGET_BOOT_ANIMATION_RES := 1080
@@ -87,6 +88,7 @@ PRODUCT_PACKAGES += \
     android.hardware.soundtrigger@2.0-impl \
     android.hardware.soundtrigger@2.0-service \
     audio.a2dp.default \
+    audio.primary.msm8953 \
     audio.r_submix.default \
     audio.usb.default \
     libaudio-resampler \
@@ -105,11 +107,6 @@ PRODUCT_COPY_FILES += \
 	$(DEVICE_PATH)/audio/aanc_tuning_mixer.txt:$(TARGET_COPY_OUT_VENDOR)/etc/aanc_tuning_mixer.txt \
         $(DEVICE_PATH)/audio/audio_platform_info.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_platform_info.xml \
         $(DEVICE_PATH)/audio/mixer_paths_mtp.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths_mtp.xml
-        
-# Audio HAL - Prebuilt (Test)
-PRODUCT_COPY_FILES += \
-	$(VENDOR_PATH)/proprietary/vendor/lib/hw/audio.primary.msm8953.so:$(TARGET_COPY_OUT_VENDOR)/lib/hw/audio.primary.msm8953.so \
-	$(VENDOR_PATH)/proprietary/vendor/lib64/hw/audio.primary.msm8953.so:$(TARGET_COPY_OUT_VENDOR)/lib64/hw/audio.primary.msm8953.so
 
 # XML Audio configuration files
 PRODUCT_COPY_FILES += \
@@ -133,7 +130,7 @@ PRODUCT_PACKAGES += \
     camera.device@3.2-impl \
     camera.msm8953 \
     libmm-qcamera \
-    SnapdragonCamera \
+    DevCamera \
     libshim_camera \
     vendor.qti.hardware.camera.device@1.0 \
     vendor.qti.hardware.camera.device@1.0_vendor
@@ -170,7 +167,8 @@ PRODUCT_PACKAGES += \
 
 # Doze mode
 PRODUCT_PACKAGES += \
-    XiaomiDoze
+    XiaomiDoze \
+    XiaomiParts
 
 # DRM
 PRODUCT_PACKAGES += \
@@ -299,7 +297,8 @@ PRODUCT_PACKAGES += \
 
 # Power
 PRODUCT_PACKAGES += \
-    android.hardware.power@1.0-service-qti
+    android.hardware.power@1.0-service-qti \
+    android.hardware.power@1.0
 
 # Properties
 -include device/xiaomi/oxygen/prop.mk
