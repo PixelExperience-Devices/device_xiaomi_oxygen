@@ -7,12 +7,6 @@
  },
  {
    "remote": "github"
-   "repository": "LineageOS/android_packages_resources_devicesettings",
-   "target_path": "packages/resources/devicesettings"
-   "revision": "lineage-15.1"
- },
- {
-   "remote": "github"
    "repository": "eva0034/vendor_xiaomi_oxygen",
    "target_path": "vendor/xiaomi"
    "revision": "8.1.x"
