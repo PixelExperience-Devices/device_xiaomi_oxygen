@@ -7,6 +7,12 @@
  },
  {
    "remote": "github"
+   "repository": "LineageOS/android_device_qcom_sepolicy",
+   "target_path": "device/qcom/sepolicy"
+   "revision": "lineage-15.1"
+ },
+ {
+   "remote": "github"
    "repository": "eva0034/vendor_xiaomi_oxygen",
    "target_path": "vendor/xiaomi"
    "revision": "8.1.x"
