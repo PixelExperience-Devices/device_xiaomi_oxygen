@@ -135,8 +135,15 @@ VSYNC_EVENT_PHASE_OFFSET_NS := 2000000
 OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
 USE_OPENGL_RENDERER := true
 
+# DeviceSettings
+PRODUCT_PACKAGES += \
+    DeviceSettings
+
 # DT2W
 TARGET_TAP_TO_WAKE_NODE := "/proc/touchpanel/enable_dt2w"
+
+# ExFAT target
+TARGET_EXFAT_DRIVER := exfat
 
 # Filesystem
 TARGET_USERIMAGES_USE_F2FS := true
@@ -166,7 +173,7 @@ TARGET_PLATFORM_DEVICE_BASE := /devices/soc/
 TARGET_RECOVERY_DEVICE_MODULES := libinit_oxygen
 
 # Lights
-TARGET_PROVIDES_LIBLIGHT := true
+#TARGET_PROVIDES_LIBLIGHT := true
 
 # Lineage Hardware
 BOARD_HARDWARE_CLASS += \

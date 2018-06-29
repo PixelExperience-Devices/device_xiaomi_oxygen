@@ -22,6 +22,17 @@ GAPPS_VARIANT := nano
 TARGET_GAPPS_ARCH := arm64
 CUSTOM_BUILD_TYPE := OFFICIAL
 
+# Include Google Stock Apps - Experimental
+GAPPS_PRODUCT_PACKAGES += \
+    GoogleCamera \
+    Music2 \
+    PixelLauncherIcons
+
+# AOSP Extras
+GAPPS_FORCE_MMS_OVERRIDES := true
+GAPPS_FORCE_WEBVIEW_OVERRIDES := true
+
+# Product Config
 PRODUCT_NAME := aosp_oxygen
 BOARD_VENDOR := Xiaomi
 
