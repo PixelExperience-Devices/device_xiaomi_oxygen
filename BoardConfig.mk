@@ -177,7 +177,8 @@ TARGET_PROVIDES_LIBLIGHT := true
 
 # Lineage Hardware
 BOARD_HARDWARE_CLASS += \
-    $(DEVICE_PATH)/lineagehw
+    $(DEVICE_PATH)/lineagehw \
+    hardware/lineage/lineagehw
 
 # Keymaster
 TARGET_PROVIDES_KEYMASTER := true
