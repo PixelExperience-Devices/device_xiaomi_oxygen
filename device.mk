@@ -97,6 +97,11 @@ PRODUCT_PACKAGES += \
     libqcompostprocbundle \
     tinymix
 
+# Using prebuilt audio HAL
+PRODUCT_PACKAGES += \
+    $(VENDOR_PATH)/proprietary/vendor/lib/hw/audio.primary.msm8953.so:$(TARGET_COPY_OUT_VENDOR)/lib/hw/audio.primary.msm8953.so \
+    $(VENDOR_PATH)/proprietary/vendor/lib64/hw/audio.primary.msm8953.so:$(TARGET_COPY_OUT_VENDOR)/lib64/hw/audio.primary.msm8953.so
+
 # Audio configuration
 PRODUCT_COPY_FILES += \
 	$(DEVICE_PATH)/audio/audio_policy.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy.conf \
