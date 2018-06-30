@@ -24,8 +24,13 @@ CUSTOM_BUILD_TYPE := OFFICIAL
 
 # Include Google Stock Apps - Experimental
 GAPPS_PRODUCT_PACKAGES += \
+    Maps \
     Music2 \
-    PixelLauncherIcons
+    PlayGames \
+    PrebuiltExchange3Google \
+    PrebuiltGmail \
+    talkback \
+    YouTube
 
 # AOSP Extras
 GAPPS_FORCE_MMS_OVERRIDES := true
