@@ -24,7 +24,6 @@ CUSTOM_BUILD_TYPE := OFFICIAL
 
 # Include Google Stock Apps - Experimental
 GAPPS_PRODUCT_PACKAGES += \
-    Maps \
     Music2 \
     PlayGames \
     PrebuiltExchange3Google \
