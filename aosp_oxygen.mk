@@ -25,15 +25,8 @@ CUSTOM_BUILD_TYPE := OFFICIAL
 # Include Google Stock Apps - Experimental
 GAPPS_PRODUCT_PACKAGES += \
     Music2 \
-    PlayGames \
-    PrebuiltExchange3Google \
     PrebuiltGmail \
-    talkback \
     YouTube
-
-# AOSP Extras
-GAPPS_FORCE_MMS_OVERRIDES := true
-GAPPS_FORCE_WEBVIEW_OVERRIDES := true
 
 # Product Config
 PRODUCT_NAME := aosp_oxygen

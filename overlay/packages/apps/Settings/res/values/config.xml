@@ -13,9 +13,6 @@
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
-<!-- Device specific doze package -->
-    <string name="config_customDozePackage" translatable="false">org.lineageos.settings.doze/org.lineageos.settings.doze.DozeSettingsActivity</string>
-
     <!-- Does the device allow for manual subscription provisioning? Only works for multi-sim devices,
          and currently depends on QC's proprietary telephony stack -->
     <bool name="config_enableManualSubProvisioning">true</bool>

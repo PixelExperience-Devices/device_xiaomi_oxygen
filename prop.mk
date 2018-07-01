@@ -27,8 +27,6 @@ vendor.audio.pp.asphere.enabled=false \
 vendor.audio.safx.pbe.enabled=true \
 vendor.audio.tunnel.encode=false \
 vendor.audio.use.sw.alac.decoder=true \
-persist.camera.eis.enable=1 \
-persist.camera.HAL3.enabled=1 \
 vendor.audio.use.sw.ape.decoder=true \
 vendor.audio_hal.period_size=192 \
 vendor.voice.conc.fallbackpath=deep-buffer \
@@ -36,7 +34,7 @@ vendor.voice.path.for.pcm.voip=true \
 vendor.voice.playback.conc.disabled=true \
 vendor.voice.record.conc.disabled=false \
 vendor.voice.voip.conc.disabled=true \
-vendor.camera.aux.packagelist=com.google.android.GoogleCameraWide,com.android.camera,com.google.android.GoogleCamera
+vendor.camera.aux.packagelist=com.google.android.Pixel2Mod,com.android.camera,com.google.android.GoogleCamera
 
 # Bluetooth
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -56,7 +54,9 @@ persist.camera.gyro.disable=0 \
 persist.camera.isp.clock.optmz=0 \
 persist.camera.stats.test=5 \
 persist.vendor.qti.telephony.vt_cam_interface=1 \
-vidc.enc.dcvs.extra-buff-count=2
+vidc.enc.dcvs.extra-buff-count=2 \
+persist.camera.eis.enable=1 \
+persist.camera.HAL3.enabled=1 \
 
 # Cne/Dpm
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -76,6 +76,7 @@ debug.mdpcomp.logs=0 \
 debug.sf.hw=0 \
 dev.pm.dyn_samplingrate=1 \
 persist.debug.wfd.enable=1 \
+persist.sys.wfd.virtual=0 \
 persist.demo.hdmirotationlock=false \
 persist.hwc.enable_vds=1 \
 persist.hwc.mdpcomp.enable=true \
