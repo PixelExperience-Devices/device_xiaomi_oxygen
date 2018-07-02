@@ -1,12 +1,6 @@
 [
  {
    "remote": "github"
-   "repository": "LineageOS/android_device_qcom_common",
-   "target_path": "device/qcom/common"
-   "revision": "lineage-15.1"
- },
- {
-   "remote": "github"
    "repository": "LineageOS/android_device_qcom_sepolicy",
    "target_path": "device/qcom/sepolicy"
    "revision": "lineage-15.1"
