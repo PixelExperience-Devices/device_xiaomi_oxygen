@@ -145,10 +145,6 @@ persist.rild.nitz_short_ons_1="" \
 persist.rild.nitz_short_ons_2="" \
 persist.rild.nitz_short_ons_3=""
 
-# PEX - Official prop
-PRODUCT_PROPERTY_OVERRIDES += \
-org.pixelexperience.ota.version_code=oreo
-
 # Property to enable display default color mode
 PRODUCT_PROPERTY_OVERRIDES += \
 vendor.display.enable_default_color_mode=1
