@@ -359,9 +359,6 @@
          pulsating and RGB control would set this config to 75. -->
     <integer name="config_deviceLightCapabilities">75</integer>
 
-    <!-- Flag indicating whether round icons should be parsed from the application manifest. -->
-    <bool name="config_useRoundIcon">true</bool>
-
     <!-- Doze: should the TYPE_PICK_UP_GESTURE sensor be used as a pulse signal. -->
     <bool name="config_dozePulsePickup">true</bool>
 
