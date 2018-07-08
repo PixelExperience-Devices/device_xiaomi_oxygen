@@ -140,6 +140,7 @@ TARGET_TAP_TO_WAKE_NODE := "/proc/touchpanel/enable_dt2w"
 
 # ExFAT target
 TARGET_EXFAT_DRIVER := exfat
+TARGET_KERNEL_HAVE_EXFAT := true
 
 # Filesystem
 TARGET_USERIMAGES_USE_F2FS := true
