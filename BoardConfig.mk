@@ -45,7 +45,7 @@ BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
 BOARD_KERNEL_PAGESIZE :=  2048
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01000000 --tags_offset 0x00000100
 TARGET_KERNEL_SOURCE := kernel/xiaomi/msm8953
-TARGET_KERNEL_CONFIG := hardrock_oxygen_defconfig
+TARGET_KERNEL_CONFIG := xtended_defconfig
 
 # ANT
 BOARD_ANT_WIRELESS_DEVICE := "vfs-prerelease"
@@ -157,7 +157,6 @@ TARGET_NO_RPC := true
 # Filesystem
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 TARGET_USERIMAGES_USE_EXT4 := true
-#TARGET_ANDROID_FILESYSTEM_CONFIG_H := $(LOCAL_PATH)/android_filesystem_config.h
 TARGET_FS_CONFIG_GEN := $(DEVICE_PATH)/config.fs
 
 # HIDL
