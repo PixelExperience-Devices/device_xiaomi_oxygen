@@ -88,6 +88,7 @@ PRODUCT_PACKAGES += \
     android.hardware.soundtrigger@2.0-impl \
     android.hardware.soundtrigger@2.0-service \
     audio.a2dp.default \
+    audio.primary.msm8953 \
     audio.r_submix.default \
     audio.usb.default \
     libaudio-resampler \
@@ -350,6 +351,9 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_BOOT_JARS += \
     telephony-ext
+
+# RRO
+PRODUCT_ENFORCE_RRO_TARGETS := framework-res
 
 # Seccomp policy
 PRODUCT_COPY_FILES += \
