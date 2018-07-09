@@ -4,5 +4,11 @@
    "repository": "LineageOS/android_packages_resources_devicesettings",
    "target_path": "packages/resources/devicesettings",
    "revision": "lineage-15.1"
+ },
+ { 
+   "remote": "github",
+   "repository": "Paletrox-Z/android_kernel_xiaomi_msm8953",
+   "target_path": "kernel/xiaomi/msm8953",
+   "revision": "suicide-silicon-o"
  }
 ]
