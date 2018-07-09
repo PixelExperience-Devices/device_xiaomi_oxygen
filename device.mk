@@ -26,7 +26,7 @@ PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := xxhdpi
 
 # Allow Missing Dependencies
-#ALLOW_MISSING_DEPENDENCIES := true
+ALLOW_MISSING_DEPENDENCIES := true
 
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += $(DEVICE_PATH)/overlay
