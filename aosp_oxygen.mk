@@ -18,15 +18,9 @@ $(call inherit-product, device/xiaomi/oxygen/full_oxygen.mk)
 
 # Inherit some common PEX stuff.
 $(call inherit-product, vendor/aosp/config/common_full_phone.mk)
-GAPPS_VARIANT := nano
+GAPPS_VARIANT := micro
 TARGET_GAPPS_ARCH := arm64
 CUSTOM_BUILD_TYPE := OFFICIAL
-
-# Include Google Stock Apps - Experimental
-GAPPS_PRODUCT_PACKAGES += \
-    Music2 \
-    PrebuiltGmail \
-    YouTube
 
 # Product Config
 PRODUCT_NAME := aosp_oxygen
