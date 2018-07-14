@@ -313,9 +313,6 @@ PRODUCT_PACKAGES += \
     android.hardware.power@1.0-service-qti \
     android.hardware.power@1.0
 
-# Properties
--include device/xiaomi/oxygen/prop.mk
-
 # QMI
 PRODUCT_PACKAGES += \
     libjson
