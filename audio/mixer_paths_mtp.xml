@@ -318,12 +318,12 @@
         <path name="deep-buffer-playback bt-sco" />
     </path>
 	
-	<path name="deep-buffer-playback speaker-and-bt-sco">
+    <path name="deep-buffer-playback speaker-and-bt-sco">
           <path name="deep-buffer-playback bt-sco" />
           <path name="deep-buffer-playback" />
      </path>
     
-	<path name="deep-buffer-playback speaker-and-bt-sco-wb">
+    <path name="deep-buffer-playback speaker-and-bt-sco-wb">
          <path name="deep-buffer-playback bt-sco-wb" />
          <path name="deep-buffer-playback" />
     </path>
@@ -385,7 +385,7 @@
         <path name="low-latency-playback bt-sco" />
     </path>
 	
-	<path name="low-latency-playback speaker-and-bt-sco">
+    <path name="low-latency-playback speaker-and-bt-sco">
          <path name="low-latency-playback bt-sco" />
           <path name="low-latency-playback" />
      </path>
@@ -574,7 +574,7 @@
         <ctl name="QUIN_MI2S_RX Audio Mixer MultiMedia7" value="1" />
     </path>
 	
-	<path name="compress-offload-playback2 speaker-and-bt-sco">
+     <path name="compress-offload-playback2 speaker-and-bt-sco">
           <path name="compress-offload-playback2 bt-sco" />
           <path name="compress-offload-playback2" />
      </path>
@@ -627,7 +627,7 @@
         <ctl name="INTERNAL_BT_SCO_RX Audio Mixer MultiMedia10" value="1" />
     </path>
 	
-	<path name="compress-offload-playback3 speaker-and-bt-sco">
+     <path name="compress-offload-playback3 speaker-and-bt-sco">
           <path name="compress-offload-playback3 bt-sco" />
           <path name="compress-offload-playback3" />
      </path>
@@ -667,7 +667,7 @@
         <ctl name="INTERNAL_BT_SCO_RX Audio Mixer MultiMedia11" value="1" />
     </path>
 	
-	<path name="compress-offload-playback4 speaker-and-bt-sco">
+     <path name="compress-offload-playback4 speaker-and-bt-sco">
           <path name="compress-offload-playback4 bt-sco" />
           <path name="compress-offload-playback4" />
      </path>
@@ -703,7 +703,7 @@
         <ctl name="INTERNAL_BT_SCO_RX Audio Mixer MultiMedia12" value="1" />
     </path>
 	
-	<path name="compress-offload-playback5 speaker-and-bt-sco">
+     <path name="compress-offload-playback5 speaker-and-bt-sco">
           <path name="compress-offload-playback5 bt-sco" />
           <path name="compress-offload-playback5" />
      </path>
@@ -747,7 +747,7 @@
         <ctl name="INTERNAL_BT_SCO_RX Audio Mixer MultiMedia13" value="1" />
     </path>
 
-	<path name="compress-offload-playback6 speaker-and-bt-sco">
+    <path name="compress-offload-playback6 speaker-and-bt-sco">
           <path name="compress-offload-playback6 bt-sco" />
           <path name="compress-offload-playback6" />
      </path>
@@ -787,7 +787,7 @@
         <ctl name="INTERNAL_BT_SCO_RX Audio Mixer MultiMedia14" value="1" />
     </path>
 	
-	<path name="compress-offload-playback7 speaker-and-bt-sco">
+    <path name="compress-offload-playback7 speaker-and-bt-sco">
           <path name="compress-offload-playback7 bt-sco" />
           <path name="compress-offload-playback7" />
      </path>
@@ -1502,7 +1502,7 @@
     <path name="bt-sco-mic">
     </path>
 	
-	<path name="speaker-and-bt-sco">
+     <path name="speaker-and-bt-sco">
           <path name="speaker" />
           <path name="bt-sco-headset" />
      </path>
