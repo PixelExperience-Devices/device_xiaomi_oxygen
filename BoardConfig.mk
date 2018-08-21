@@ -52,7 +52,6 @@ BOARD_ANT_WIRELESS_DEVICE := "vfs-prerelease"
 
 # Audio
 # My custom configs
-AUDIO_FEATURE_ENABLED_SSR := true
 DOLBY_DDP := true
 DS1_DOLBY_DAP := true
 AUDIO_FEATURE_ENABLED_DS2_DOLBY_DAP := true
