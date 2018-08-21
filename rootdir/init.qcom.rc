@@ -133,6 +133,9 @@ on boot
     #Remove SUID bit for iproute2 ip tool
     chmod 0755 /system/bin/ip
 
+    # Creating symlink for acdcbdata in /system/etc for backward compatibility
+    symlink /system/etc/acdbdata /system/vendor/etc/acdbdata
+
 
     chmod 0444 /sys/devices/platform/msm_hsusb/gadget/usb_state
 
