@@ -18,10 +18,16 @@ LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
 
-LOCAL_C_INCLUDES := system/core/init
+LOCAL_C_INCLUDES := \
+    system/core/base/include \
+    system/core/init \
+    external/selinux/libselinux/include
 LOCAL_MODULE := libinit_oxygen
 LOCAL_MODULE_TAGS := optional
 LOCAL_SRC_FILES := init_oxygen.cpp
-LOCAL_STATIC_LIBRARIES := libbase libselinux
+POCAL_STD_CPP := c++17
+LOCAL_STATIC_LIBRARIES := \
+      libbase \
+      libselinux
 
 include $(BUILD_STATIC_LIBRARY)
