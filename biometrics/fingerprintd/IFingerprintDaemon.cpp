@@ -23,13 +23,13 @@
 #include <binder/PermissionCache.h>
 #include <utils/String16.h>
 #include <utils/Looper.h>
-#include <keystore/IKeystoreService.h>
-#include <keystore/keystore.h> // for error code
 #include <hardware/hardware.h>
 #include <hardware/fingerprint.h>
 #include <hardware/hw_auth_token.h>
+#include <android/security/IKeystoreService.h>
 #include "IFingerprintDaemon.h"
 #include "IFingerprintDaemonCallback.h"
+
 
 namespace android {
 
