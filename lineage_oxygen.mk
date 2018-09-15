@@ -16,14 +16,14 @@
 
 $(call inherit-product, device/xiaomi/oxygen/full_oxygen.mk)
 
-# Inherit some common RevengeOS stuff.
-$(call inherit-product, vendor/revengeos/config/common_full_phone.mk)
+# Inherit some common LineageOS stuff.
+$(call inherit-product, vendor/lineage/config/common_full_phone.mk)
 GAPPS_VARIANT := nano
 TARGET_GAPPS_ARCH := arm64
-CUSTOM_BUILD_TYPE := OFFICIAL
+CUSTOM_BUILD_TYPE := UNOFFICIAL
 
 # Product Config
-PRODUCT_NAME := revengeos_oxygen
+PRODUCT_NAME := lineage_oxygen
 BOARD_VENDOR := Xiaomi
 
 # Extra Essential Gapps
