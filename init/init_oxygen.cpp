@@ -31,6 +31,7 @@
 
 #include "vendor_init.h"
 #include "property_service.h"
+#include "log.h"
 
 char const *heapstartsize;
 char const *heapgrowthlimit;
