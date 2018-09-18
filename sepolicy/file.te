@@ -1,8 +1,16 @@
 # Fingerprint
-type fpc_data_file, file_type, data_file_type;
+type fpc_data_file, file_type, core_data_file_type, data_file_type;
 type fpce_socket, file_type;
 type fpc_sysfs, fs_type, sysfs_type;
 type gx_fpd_data_file, file_type, data_file_type;
+
+# Input devices
+type idc_file, file_type, vendor_file_type;
+type keylayout_file, file_type, vendor_file_type;
+
+# Power
+type debugfs_wlan, debugfs_type, fs_type;
+type sysfs_touchpanel, sysfs_type, fs_type;
 
 # Rild
 type rild_file, file_type, vendor_file_type;
@@ -13,3 +21,6 @@ type debugfs_rmt, debugfs_type, fs_type;
 # Touchscreen
 type proc_touchpanel, fs_type, sysfs_type;
 
+# Thermal engine
+type thermal_data_file, core_data_file_type, data_file_type, file_type;
+type thermal_decrypt_file, core_data_file_type, data_file_type, file_type;
