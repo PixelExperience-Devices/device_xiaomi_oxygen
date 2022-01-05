@@ -24,6 +24,9 @@ $(call inherit-product, device/xiaomi/oxygen/device.mk)
 # Inherit some common LineageOS stuff.
 $(call inherit-product, vendor/aosp/config/common_full_phone.mk)
 
+# Quick Tap
+TARGET_SUPPORTS_QUICK_TAP := true
+
 # Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := oxygen
 PRODUCT_NAME := aosp_oxygen
