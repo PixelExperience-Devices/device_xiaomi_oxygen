@@ -5,7 +5,7 @@
 # Audio
 af.fast_track_multiplier=2
 audio.offload.min.duration.secs=30
-persist.vendor.audio.fluence.speaker=true
+persist.vendor.audio.fluence.speaker=false
 persist.vendor.audio.fluence.voicecall=true
 persist.vendor.audio.fluence.voicecomm=true
 persist.vendor.audio.fluence.voicerec=false
