@@ -30,13 +30,15 @@ import org.lineageos.settings.soundcontrol.SoundControlSettings;
 
 public class BootCompletedReceiver extends BroadcastReceiver {
 
-	private static final boolean DEBUG = false;
-	private static final String TAG = "XiaomiParts";
+    private static final boolean DEBUG = false;
+    private static final String TAG = "XiaomiParts";
 
     @Override
     public void onReceive(final Context context, Intent intent) {
         if (DozeUtils.isDozeEnabled(context) && DozeUtils.sensorsEnabled(context)) {
-            if (DEBUG) Log.d(TAG, "Starting Doze service");
+            if (DEBUG) {
+		    Log.d(TAG, "Starting Doze service");
+	    }
             DozeUtils.startService(context);
         }
         new DiracUtils(context).onBootCompleted();
